@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import api from "../api";
 
-function ClientForm() {
-  const [form, setForm] = useState({ id: "",nombre: "", ciudad: "",motivo: "", contacto: "" });
+function DollForm() {
+  const [form, setForm] = useState({ id: "", nombre: "" , edad:"",activo:"", carta:""});
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -12,11 +12,11 @@ function ClientForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/clients", form);
-      setMessage("✅ Cliente registrado correctamente");
-      setForm({ id:"",nombre: "", ciudad: "", motivo:"",contacto:"" });
+      await api.post("/dolls", form);
+      setMessage("✅ Doll registrada correctamente");
+      setForm({ id: "", nombre: "",edad:"",activo:"" ,carta: ""});
     } catch (error) {
-      setMessage("❌ Error al registrar cliente");
+      setMessage("❌ Error al registrar doll");
     }
   };
 
@@ -41,33 +41,33 @@ function ClientForm() {
         required
       />
       <input
-        type="text"
-        name="ciudad"
-        placeholder="Ciudad"
-        value={form.ciudad}
+        type="number"
+        name="edad"
+        placeholder="Edad"
+        value={form.edad}
         onChange={handleChange}
         className="border p-2 w-full rounded"
         required
       />
       <input
-        type="text"
-        name="motivo"
-        placeholder="Motivo"
-        value={form.motivo}
+        type="bool"
+        name="activo"
+        placeholder="Activo"
+        value={form.activo}
         onChange={handleChange}
         className="border p-2 w-full rounded"
         required
       />
       <input
-        type="text"
-        name="contacto"
-        placeholder="Contacto"
-        value={form.contacto}
+        type="number"
+        name="carta"
+        placeholder="Cartas escritas"
+        value={form.carta}
         onChange={handleChange}
         className="border p-2 w-full rounded"
         required
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
         Guardar
       </button>
       {message && <p className="text-sm mt-2">{message}</p>}
@@ -75,4 +75,4 @@ function ClientForm() {
   );
 }
 
-export default ClientForm;
+export default DollForm;
